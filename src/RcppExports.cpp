@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// findParetoSet
+NumericMatrix findParetoSet(SEXP idealPoints);
+RcppExport SEXP _MinimumRcpp_findParetoSet(SEXP idealPointsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type idealPoints(idealPointsSEXP);
+    rcpp_result_gen = Rcpp::wrap(findParetoSet(idealPoints));
+    return rcpp_result_gen;
+END_RCPP
+}
 // kintersection
 int kintersection(const int i);
 RcppExport SEXP _MinimumRcpp_kintersection(SEXP iSEXP) {
@@ -29,6 +40,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_MinimumRcpp_findParetoSet", (DL_FUNC) &_MinimumRcpp_findParetoSet, 1},
     {"_MinimumRcpp_kintersection", (DL_FUNC) &_MinimumRcpp_kintersection, 1},
     {"_MinimumRcpp_inner", (DL_FUNC) &_MinimumRcpp_inner, 1},
     {NULL, NULL, 0}
