@@ -1,0 +1,45 @@
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+]0;~/Desktop/MinimumRcpp[?1034hEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ [KEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git init
+Initialized empty Git repository in /Users/EduardoR/Desktop/MinimumRcpp/.git/
+]0;~/Desktop/MinimumRcppEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git commit -m ""f"i"r"s"t" "c"m"[1P"o"m"m"i"t"
+On branch master
+
+Initial commit
+
+Untracked files:
+	[31m.Rbuildignore[m
+	[31m.Rproj.user/[m
+	[31mDESCRIPTION[m
+	[31mMinimumRcpp.Rproj[m
+	[31mNAMESPACE[m
+	[31mR/[m
+	[31mman/[m
+	[31msrc/[m
+
+nothing added to commit but untracked files present
+]0;~/Desktop/MinimumRcppEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git remote add origin git@github.com:eduardoRubioG/MinimumRcpp.git
+]0;~/Desktop/MinimumRcppEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git push -u origin master
+error: src refspec master does not match any
+[31merror: failed to push some refs to 'git@github.com:eduardoRubioG/MinimumRcpp.git'
+[m]0;~/Desktop/MinimumRcppEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.Rbuildignore[m
+	[31m.Rproj.user/[m
+	[31mDESCRIPTION[m
+	[31mMinimumRcpp.Rproj[m
+	[31mNAMESPACE[m
+	[31mR/[m
+	[31mman/[m
+	[31msrc/[m
+
+nothing added to commit but untracked files present (use "git add" to track)
+]0;~/Desktop/MinimumRcppEduardoR@Eduardos-MBP MinimumRcpp[32m[00m $ git add .

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587332614201.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EC61700A",
+    "lastKnownWriteTime" : 1587332637,
+    "last_content_update" : 1587332637221,
+    "path" : "~/Desktop/MinimumRcpp/src/kintersection.h",
+    "project_path" : "src/kintersection.h",
+    "properties" : {
+        "cursorPosition" : "11,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "h"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587331541201.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AE79A45B",
+    "lastKnownWriteTime" : 1587331668,
+    "last_content_update" : 1587331668618,
+    "path" : "~/Desktop/MinimumRcpp/R/MinimumRcpp-package.R",
+    "project_path" : "R/MinimumRcpp-package.R",
+    "properties" : {
+        "cursorPosition" : "8,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
