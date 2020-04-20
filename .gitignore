@@ -1,6 +1,7 @@
 inst/lib
 .Rproj.user
 .Rproj.user/
+.Rproj.user/**
 src/*.o
 src/*.so
 src/*.dll
