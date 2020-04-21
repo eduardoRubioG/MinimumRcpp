@@ -17,32 +17,22 @@ BEGIN_RCPP
 END_RCPP
 }
 // kintersection
-int kintersection(const int i);
-RcppExport SEXP _MinimumRcpp_kintersection(SEXP iSEXP) {
+Rcpp::List kintersection(Rcpp::List polyList, const int k, const double epsilon);
+RcppExport SEXP _MinimumRcpp_kintersection(SEXP polyListSEXP, SEXP kSEXP, SEXP epsilonSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const int >::type i(iSEXP);
-    rcpp_result_gen = Rcpp::wrap(kintersection(i));
-    return rcpp_result_gen;
-END_RCPP
-}
-// inner
-int inner(const int i);
-RcppExport SEXP _MinimumRcpp_inner(SEXP iSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const int >::type i(iSEXP);
-    rcpp_result_gen = Rcpp::wrap(inner(i));
+    Rcpp::traits::input_parameter< Rcpp::List >::type polyList(polyListSEXP);
+    Rcpp::traits::input_parameter< const int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const double >::type epsilon(epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(kintersection(polyList, k, epsilon));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_MinimumRcpp_findParetoSet", (DL_FUNC) &_MinimumRcpp_findParetoSet, 1},
-    {"_MinimumRcpp_kintersection", (DL_FUNC) &_MinimumRcpp_kintersection, 1},
-    {"_MinimumRcpp_inner", (DL_FUNC) &_MinimumRcpp_inner, 1},
+    {"_MinimumRcpp_kintersection", (DL_FUNC) &_MinimumRcpp_kintersection, 3},
     {NULL, NULL, 0}
 };
 

@@ -1,3 +1,5 @@
+#ifndef FINDPARETOSET__
+#define FINDPARETOSET__
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -6,31 +8,31 @@ using namespace Rcpp;
 #include <boost/geometry/geometries/adapted/boost_tuple.hpp>
 
 BOOST_GEOMETRY_REGISTER_BOOST_TUPLE_CS(cs::cartesian)
-typedef boost::tuple<double, double> point;
-typedef boost::geometry::model::polygon<point, true, true> polygon;
+typedef boost::tuple<double, double> Point;
+typedef boost::geometry::model::polygon<Point, true, true> Polygon;
 
 namespace Rcpp {
 
   // as<>() converter from R --> Boost.Geometry's Polygon Type
-  template <> polygon as(SEXP pointsMatrixSEXP){
+  template <> Polygon as(SEXP pointsMatrixSEXP){
     NumericMatrix pointsMatrix(pointsMatrixSEXP);
-    polygon poly;
+    Polygon poly;
     for( int i = 0; i < pointsMatrix.nrow(); i++ ){
       double x = pointsMatrix( i , 0 );
       double y = pointsMatrix( i , 1 );
-      point p(x,y);
+      Point p(x,y);
       poly.outer().push_back(p);
     }
     return (poly);
   }
 
-  // wrap() converter for Boost.Geometry's polygon --> R(cpp) matrix
+  // wrap() converter for Boost.Geometry's Polygon --> R(cpp) matrix
   // So now Rcpp NumericMatrix can be converted to/from SEXP type
-  template <> SEXP wrap( const polygon& poly ){
-    const std::vector<point>& points = poly.outer();
+  template <> SEXP wrap( const Polygon& poly ){
+    const std::vector<Point>& points = poly.outer();
     NumericMatrix rmat(points.size(), 2);
     for( unsigned int i = 0; i < points.size(); ++i ){
-      const point& p = points[i];
+      const Point& p = points[i];
       rmat(i,0) = p.get<0>();
       rmat(i,1) = p.get<1>();
     }
@@ -42,10 +44,10 @@ namespace Rcpp {
 //' @param idealPoints ...
 // [[Rcpp::export]]
 NumericMatrix findParetoSet( SEXP idealPoints ){
-  polygon poly = as<polygon>(idealPoints);
-  polygon hull;
+  Polygon poly = as<Polygon>(idealPoints);
+  Polygon hull;
   boost::geometry::convex_hull(poly, hull);
   return wrap(hull);
 }
-
+#endif
 

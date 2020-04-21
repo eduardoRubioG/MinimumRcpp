@@ -7,15 +7,7 @@ findParetoSet <- function(idealPoints) {
     .Call(`_MinimumRcpp_findParetoSet`, idealPoints)
 }
 
-#' Does something
-#' @param i something
-kintersection <- function(i) {
-    .Call(`_MinimumRcpp_kintersection`, i)
-}
-
-#' Does something
-#' @param i something
-inner <- function(i) {
-    .Call(`_MinimumRcpp_inner`, i)
+kintersection <- function(polyList, k, epsilon) {
+    .Call(`_MinimumRcpp_kintersection`, polyList, k, epsilon)
 }
 
