@@ -62,6 +62,10 @@ inline Polygon2D& polygonRef(std::pair<const std::set<std::size_t>, Polygon2D>& 
   return kvp.second;
 }
 
+//' Return k intersection
+//' @param polyList An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points
+//' @param k Number of intersections user is looking for
+//' @param epsilon Error tolerance
 // [[Rcpp::export]]
 Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon ){
   /* Error checking before anything begins */

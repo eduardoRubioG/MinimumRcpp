@@ -7,6 +7,10 @@ findParetoSet <- function(idealPoints) {
     .Call(`_MinimumRcpp_findParetoSet`, idealPoints)
 }
 
+#' Return k intersection
+#' @param polyList An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points
+#' @param k Number of intersections user is looking for
+#' @param epsilon Error tolerance
 kintersection <- function(polyList, k, epsilon) {
     .Call(`_MinimumRcpp_kintersection`, polyList, k, epsilon)
 }
