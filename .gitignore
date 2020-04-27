@@ -26,7 +26,7 @@ GRTAGS
 GTAGS
 
 ##
-local/
+# local/ ## Find better place for script files
 
 ## docker helpers
 docker/*sh
