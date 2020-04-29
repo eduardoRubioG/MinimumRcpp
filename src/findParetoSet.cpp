@@ -44,7 +44,7 @@ namespace Rcpp {
 //' @param idealPoints ...
 //' @export
 // [[Rcpp::export]]
-NumericMatrix findParetoSet( SEXP idealPoints ){
+DataFrame findParetoSet( SEXP idealPoints ){
   Polygon poly = as<Polygon>(idealPoints);
   Polygon hull;
   boost::geometry::convex_hull(poly, hull);

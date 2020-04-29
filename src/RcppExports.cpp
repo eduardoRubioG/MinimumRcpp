@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // findParetoSet
-NumericMatrix findParetoSet(SEXP idealPoints);
+DataFrame findParetoSet(SEXP idealPoints);
 RcppExport SEXP _MinimumRcpp_findParetoSet(SEXP idealPointsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
