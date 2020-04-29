@@ -3,6 +3,7 @@
 
 #' Find the pareto set, or the convex hull of the input data
 #' @param idealPoints ...
+#' @export
 findParetoSet <- function(idealPoints) {
     .Call(`_MinimumRcpp_findParetoSet`, idealPoints)
 }
@@ -11,6 +12,7 @@ findParetoSet <- function(idealPoints) {
 #' @param polyList An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points
 #' @param k Number of intersections user is looking for
 #' @param epsilon Error tolerance
+#' @export
 kintersection <- function(polyList, k, epsilon) {
     .Call(`_MinimumRcpp_kintersection`, polyList, k, epsilon)
 }
