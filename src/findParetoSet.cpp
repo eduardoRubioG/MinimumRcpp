@@ -42,6 +42,7 @@ namespace Rcpp {
 
 //' Find the pareto set, or the convex hull of the input data
 //' @param idealPoints ...
+//' @export
 // [[Rcpp::export]]
 NumericMatrix findParetoSet( SEXP idealPoints ){
   Polygon poly = as<Polygon>(idealPoints);
