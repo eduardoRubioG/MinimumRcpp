@@ -66,9 +66,10 @@ inline Polygon2D& polygonRef(std::pair<const std::set<std::size_t>, Polygon2D>& 
 //' @param polyList An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points
 //' @param k Number of intersections user is looking for
 //' @param epsilon Error tolerance
+//' @param printPolygons An optional parameter that allows user to print inputted polygons. Default value is false
 //' @export
 // [[Rcpp::export]]
-Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon ){
+Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon, bool printPolygons = false ){
   /* Error checking before anything begins */
   if( k == 0 )
     Rcpp::stop("Invalid Argument: Zero-intersection is illegal");
@@ -92,12 +93,12 @@ Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon
     D = as<DataFrame>(polyList(i));
     x = D["x"];
     y = D["y"];
-    Rcout << "POLYGON " << i+1 << std::endl;
+    if( printPolygons ) Rcout << "POLYGON " << i+1 << std::endl;
     for( int c = 0; c < x.size(); c++ ){
       boost::geometry::set<0>(p,x(c));
       boost::geometry::set<1>(p,y(c));
       boost::geometry::append(poly.outer(), p);
-      Rcout << x(c) << " " << y(c) << std::endl;
+      if( printPolygons ) Rcout << x(c) << " " << y(c) << std::endl;
     }
     local_plist.push_back(poly);
   }
