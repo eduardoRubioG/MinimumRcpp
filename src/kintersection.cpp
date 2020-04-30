@@ -1,52 +1,18 @@
 #ifndef KINTERSECTION_CPP
 #define KINTERSECTION_CPP
-#include <Rcpp.h>
+#include "../inst/include/MinimumRcpp.h"
 #include <stdio.h>
 
-// STL headers
+/* STL headers */
 #include <vector>
 #include <list>
 
-// Boost headers
-#include <boost/geometry.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/geometry/geometries/point_xy.hpp>
-#include <boost/geometry/geometries/polygon.hpp>
-
+/* Typedefs for convenience */
 typedef boost::geometry::model::d2::point_xy<double> Point;
 typedef boost::geometry::model::polygon<Point> Polygon2D;
 using namespace Rcpp;
 
-namespace Rcpp {
-  // wrap() converter for Boost.Geometry's Polygon --> R(cpp) matrix
-  // So now Rcpp NumericMatrix can be converted to/from SEXP type
-  template <> SEXP wrap( const std::vector<Polygon2D>& poly  ){
-    Rcpp::List result;
-    Rcpp::DataFrame D;
-    /* Generate a DF for each polygon in the polygon vector */
-    for( int i = 0; i < poly.size(); i++ ){
-      NumericVector x;
-      NumericVector y;
-      std::vector<double> xvec;
-      std::vector<double> yvec;
-      xvec.reserve(boost::geometry::num_points(poly[i]));
-      yvec.reserve(boost::geometry::num_points(poly[i]));
-      for(auto it = boost::begin(boost::geometry::exterior_ring(poly[i])); it != boost::end(boost::geometry::exterior_ring(poly[i])); ++it){
-        double xval = boost::geometry::get<0>(*it);
-        double yval = boost::geometry::get<1>(*it);
-        xvec.push_back(xval);
-        yvec.push_back(yval);
-      }
-      /* Push polygon DF into List */
-      Rcpp::DataFrame D = Rcpp::DataFrame::create( Named("x") = xvec, Named("y") = yvec );
-      result.push_back(D);
-    }
-    /* Return list of DF */
-    return Rcpp::wrap(result);
-  }
-}
-
-/* Internal CPP Protoype Declaration */
+/* Internal CPP Protoype Declarations */
 template<class Container>
 std::vector<Polygon2D> simplifyAndMergePolygons( Container& c, const double epsilon );
 template<class Container>
@@ -54,21 +20,17 @@ std::list<Polygon2D> simplifyPolygons(Container& c, const double epsilon);
 void mergePolygonsPass(std::list<Polygon2D>& c, const double epsilon);
 
 /* Inline referencers */
-inline Polygon2D& polygonRef(Polygon2D& polygon) noexcept{
-  return polygon;
-}
-
-inline Polygon2D& polygonRef(std::pair<const std::set<std::size_t>, Polygon2D>& kvp) noexcept{
-  return kvp.second;
-}
+inline Polygon2D& polygonRef(Polygon2D& polygon) noexcept{ return polygon; }
+inline Polygon2D& polygonRef(std::pair<const std::set<std::size_t>, Polygon2D>& kvp) noexcept{ return kvp.second; }
 
 //' Return k intersection
 //' @param polyList An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points
 //' @param k Number of intersections user is looking for
 //' @param epsilon Error tolerance
+//' @param printPolygons An optional parameter that allows user to print inputted polygons. Default value is false
 //' @export
 // [[Rcpp::export]]
-Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon ){
+Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon, bool printPolygons = false ){
   /* Error checking before anything begins */
   if( k == 0 )
     Rcpp::stop("Invalid Argument: Zero-intersection is illegal");
@@ -92,12 +54,12 @@ Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon
     D = as<DataFrame>(polyList(i));
     x = D["x"];
     y = D["y"];
-    Rcout << "POLYGON " << i+1 << std::endl;
+    if( printPolygons ) Rcout << "POLYGON " << i+1 << std::endl;
     for( int c = 0; c < x.size(); c++ ){
       boost::geometry::set<0>(p,x(c));
       boost::geometry::set<1>(p,y(c));
       boost::geometry::append(poly.outer(), p);
-      Rcout << x(c) << " " << y(c) << std::endl;
+      if( printPolygons ) Rcout << x(c) << " " << y(c) << std::endl;
     }
     local_plist.push_back(poly);
   }
@@ -181,6 +143,10 @@ Rcpp::List kintersection( Rcpp::List polyList, const int k, const double epsilon
   return wrap(cresult);
 }
 
+/*
+ * The following functions are helper functions to be used within the kintersection function and will not be exposed
+ * to the user from r.
+ */
 template<class Container>
 std::vector<Polygon2D> simplifyAndMergePolygons( Container& c, const double epsilon ){
   auto unions = simplifyPolygons(c, epsilon);
