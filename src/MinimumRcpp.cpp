@@ -22,7 +22,7 @@ namespace Rcpp {
         xvec.push_back(xval);
         yvec.push_back(yval);
       }
-      /* Push polygon DF into List */
+      /* Push polygon into List */
       Rcpp::DataFrame D = Rcpp::DataFrame::create( Named("x") = xvec, Named("y") = yvec );
       result.push_back(D);
     }
