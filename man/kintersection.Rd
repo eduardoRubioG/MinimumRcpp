@@ -4,7 +4,7 @@
 \alias{kintersection}
 \title{Return k intersection}
 \usage{
-kintersection(polyList, k, epsilon)
+kintersection(polyList, k, epsilon, printPolygons = FALSE)
 }
 \arguments{
 \item{polyList}{An R list containing DataFrames with 2 columns names 'x' and 'y' representing polygon points}
@@ -12,6 +12,8 @@ kintersection(polyList, k, epsilon)
 \item{k}{Number of intersections user is looking for}
 
 \item{epsilon}{Error tolerance}
+
+\item{printPolygons}{An optional parameter that allows user to print inputted polygons. Default value is false}
 }
 \description{
 Return k intersection
